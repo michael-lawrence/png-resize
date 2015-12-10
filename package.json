@@ -1,6 +1,6 @@
 {
 	"name": "png-resize",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Simple script for resizing xxxhdpi images to the various sizes needed for mobile development.",
 	"main": "lib/png-resize.js",
 	"bin": {

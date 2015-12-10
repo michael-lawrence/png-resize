@@ -3,7 +3,7 @@ import path from 'path';
 import lwip from 'lwip';
 import commander from 'commander';
 
-let config = require('./package.json');
+let config = require('../package.json');
 let cwd = process.cwd();
 let sizes = [
 	['ldpi', 0.1875],
