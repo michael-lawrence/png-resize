@@ -1,7 +1,8 @@
-#!/usr/local/bin/node
+#!/usr/bin/env node
 import path from 'path';
 import lwip from 'lwip';
 import commander from 'commander';
+import file from 'file';
 
 let config = require('../package.json');
 let cwd = process.cwd();
@@ -16,12 +17,16 @@ let sizes = [
 
 commander
 	.version(config.version)
-	.option('-i, --input [file]', 'The input file [file]')
+	.option('-i, --input [file]', 'The input file path')
+	.option('-d, --directory [dir]', 'The input directory path (this is recursive)')
+	.option('-im, --interpolation [nearest-neighbor, moving-average, linear, grid, cubic, or lanczos]', 'The interpolation method [lanczos]')
+	.option('-c, --compression [none, fast, high]', 'Image compression level [fast]')
 	.parse(process.argv);
 
-function batchScale(sizes, index, input) {
-	console.log('batch', index);
+let interpolation = commander.interpolation || 'lanczos';
+let compression = commander.compression || 'fast';
 
+function batchScale(index, input) {
 	if (sizes.length > index) {
 		let ext = path.extname(input);
 		let basename = path.basename(input, ext);
@@ -31,26 +36,30 @@ function batchScale(sizes, index, input) {
 		let scale = sizes[index][1];
 		let output = path.resolve(dirname, `${basename}-${label}${ext}`);
 
-		lwip.open(input, (err, image) => {
+		console.log('Processing', output);
+
+		lwip.open(input, (err, image) =>
 			image
 				.batch()
-				.scale(scale)
+				.scale(scale, interpolation)
 				.writeFile(output, {
-					'compression': 'fast',
+					compression,
 					'interlaced': true,
 					'transparency': 'auto'
-				}, err => {
-					if (err) {
-						console.error(err);
-					} else {
-						batchScale(sizes, index + 1, input);
-					}
-				});
-		});
+				}, err => (err) ? console.error(err) : batchScale(index + 1, input))
+		);
 	}
+}
+
+if (commander.directory) {
+	file.walk(commander.directory, (nil, dirPath, dirs, files) =>
+		files
+			.filter(file => file.endsWith('.png'))
+			.forEach(file => batchScale(0, file))
+	);
 }
 
 if (commander.input) {
 	let input = path.resolve(cwd, commander.input);
-	batchScale(sizes, 0, input);
+	batchScale(0, input);
 }
