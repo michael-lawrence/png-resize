@@ -1,3 +1,4 @@
+#!/usr/local/bin/node
 import path from 'path';
 import lwip from 'lwip';
 import commander from 'commander';
