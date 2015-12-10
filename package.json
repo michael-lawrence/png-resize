@@ -2,13 +2,13 @@
   "name": "png-resize",
   "version": "0.0.1",
   "description": "Simple script for resizing xxxhdpi images to the various sizes needed for mobile development.",
-  "main": "index.js",
+  "main": "lib/png-resize.js",
   "bin": {
-    "sap": "./bin/png-resize.js"
+    "png-resize": "lib/png-resize.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "babel index.js --out-file ./bin/png-resize.js",
+    "compile": "babel -d lib/ src/",
     "install": "npm run compile",
     "prepublish": "npm run compile"
   },
@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/michael-lawrence/png-resize#readme",
   "dependencies": {
-    "babel": "^6.3.13",
     "commander": "^2.9.0",
     "lwip": "0.0.8"
   }
