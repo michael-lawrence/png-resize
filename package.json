@@ -1,37 +1,39 @@
 {
-  "name": "png-resize",
-  "version": "0.0.1",
-  "description": "Simple script for resizing xxxhdpi images to the various sizes needed for mobile development.",
-  "main": "lib/png-resize.js",
-  "bin": {
-    "png-resize": "lib/png-resize.js"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "babel -d lib/ src/",
-    "install": "npm run compile",
-    "prepublish": "npm run compile"
-  },
-  "preferGlobal": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/michael-lawrence/png-resize.git"
-  },
-  "keywords": [
-    "image",
-    "resize",
-    "png",
-    "mobile",
-    "dp"
-  ],
-  "author": "Michael Lawrence <me@mikelawrence.co>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/michael-lawrence/png-resize/issues"
-  },
-  "homepage": "https://github.com/michael-lawrence/png-resize#readme",
-  "dependencies": {
-    "commander": "^2.9.0",
-    "lwip": "0.0.8"
-  }
+	"name": "png-resize",
+	"version": "0.0.1",
+	"description": "Simple script for resizing xxxhdpi images to the various sizes needed for mobile development.",
+	"main": "lib/png-resize.js",
+	"bin": {
+		"png-resize": "lib/png-resize.js"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"compile": "babel -d lib/ src/",
+		"prepublish": "npm run compile"
+	},
+	"preferGlobal": true,
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/michael-lawrence/png-resize.git"
+	},
+	"keywords": [
+		"image",
+		"resize",
+		"png",
+		"mobile",
+		"dp"
+	],
+	"author": "Michael Lawrence <me@mikelawrence.co>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/michael-lawrence/png-resize/issues"
+	},
+	"homepage": "https://github.com/michael-lawrence/png-resize#readme",
+	"dependencies": {
+		"commander": "^2.9.0",
+		"lwip": "0.0.8"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.3.15"
+	}
 }
